@@ -38,7 +38,7 @@ pipeline {
 		stage('Publish'){
 			steps{
 				script{
-					bat '''dotnet publish WebApp.csproj -c Release -o publish'''
+					bat '''dotnet publish WebApp\\WebApp.csproj -c Release -o publish'''
 				}
 			}
 		}
