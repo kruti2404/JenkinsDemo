@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="JenkinsFile" />
+  </Folder>
+  <Project Path="WebApp/WebApp.csproj" />
+</Solution>
