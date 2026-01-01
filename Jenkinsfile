@@ -38,7 +38,7 @@ pipeline {
 		stage('Publish'){
 			steps{
 				script{
-					bat "dotnet test --no-build --configuration Release --output .//publish"
+					bat '''dotnet publish WebApp.csproj -c Release -o publish'''
 				}
 			}
 		}
