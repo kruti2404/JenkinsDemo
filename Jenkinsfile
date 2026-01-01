@@ -11,13 +11,18 @@ pipeline {
 				checkout scm
 			}
 		}
+		stage('Restore'){
+			steps{
+				script{
+					bat "dotnet restore"
+				}
+			}
+		}
 
 		stage('Build'){
 			steps{
 				script{
-					bat "dotnet restore"
-
-					bat "dotnet build --configuration Release"
+					bat "dotnet build --no-restore --configuration Release"
 				}
 			}
 		}
@@ -25,7 +30,7 @@ pipeline {
 		stage('Test'){
 			steps{
 				script{
-					bat "dotnet test --no-restore --configuration Release"
+					bat "dotnet test --no-build --configuration Release"
 				}
 			}
 		}
@@ -33,15 +38,24 @@ pipeline {
 		stage('Publish'){
 			steps{
 				script{
-					bat "dotnet test --no-restore --configuration Release --output .//publish"
+					bat "dotnet test --no-test --configuration Release --output .//publish"
 				}
+			}
+		}
+
+		stage('Run'){
+			steps{
+				 bat """
+                cd publish
+                dotnet WebApp.dll
+                """
 			}
 		}
 	}
 
 	post {
 		success{
-			echo "Build, Test and Published Successfull"
+			echo "Build, Test, Publish and Run Successfull"
 		}
 	}
 }
