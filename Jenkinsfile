@@ -35,6 +35,14 @@ pipeline {
 			}
 		}
 
+		stage('Santity Check'){
+			steps{
+				script{
+					input "Is this code look perfect then we can go ahead?"
+				}
+			}
+		}
+
 		stage('Publish'){
 			steps{
 				script{
